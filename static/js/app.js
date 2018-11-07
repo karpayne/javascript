@@ -20,8 +20,7 @@ $prevBtn.addEventListener("click", handlePrevButtonClick);
 $pages.addEventListener("change", handlePagesChange);
 
 // Initialize global variables
-var dataSet = [];
-var filteredData = dataSet;
+var filteredData = data;
 var count = 0;
 
 // Define Event handler functions
@@ -94,7 +93,7 @@ function handleSearchButtonClick() {
 // handleReloadButtonClick resets count and search fields, and renders
 function handleReloadButtonClick() {
     count = 0;
-    filteredData = dataSet;
+    filteredData = data;
     $dateTimeInput.value = '';
     $cityInput.value = '';
     $stateInput.value = '';
@@ -139,19 +138,19 @@ function renderTable() {
     }
 
     // Displays record counts and loads records into table
-   // $recordCounter.innerText = "From Record: " + start + " to: " + end + " of " + filteredData.length;
+    $recordCounter.innerText = "From Record: " + start + " to: " + end + " of " + filteredData.length;
     // Outer loop loads specified number of records
-   // for (var i = 0; i < pages; i++) {
-     //   var item = filteredData[i+(count * pages)];
-      //  var fields = Object.keys(item);
-    //    var $row = $tbody.insertRow(i);
+    for (var i = 0; i < pages; i++) {
+        var item = filteredData[i+(count * pages)];
+        var fields = Object.keys(item);
+        var $row = $tbody.insertRow(i);
         // Inner loop loads fields in record
-      //  for (var j = 0; j < fields.length; j++) {
-        //    var field = fields[j];
-        //    var $cell = $row.insertCell(j);
-        //    $cell.innerText = item[field];
-      //  }
-  //  }
+        for (var j = 0; j < fields.length; j++) {
+            var field = fields[j];
+            var $cell = $row.insertCell(j);
+            $cell.innerText = item[field];
+        }
+    }
 }
 
 // Provides initial render on open
